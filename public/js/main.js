@@ -249,3 +249,103 @@ window.addEventListener('resize', () => {
 
 
 
+const loginButton = document.querySelector('#open-login-modal') || document.querySelector('.login-btn');
+const loginModal = document.querySelector('#login-modal');
+const loginCloseButtons = document.querySelectorAll('[data-close-login]');
+const closeLoginModal = () => {
+    if (!loginModal) {
+        return;
+    }
+    loginModal.classList.remove('is-open');
+    loginModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('login-modal-open');
+};
+const openLoginModal = () => {
+    if (!loginModal) {
+        return;
+    }
+    loginModal.classList.add('is-open');
+    loginModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('login-modal-open');
+    const firstInput = loginModal.querySelector('input');
+    if (firstInput) {
+        firstInput.focus();
+    }
+};
+if (loginButton && loginModal) {
+    loginButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        openLoginModal();
+    });
+    loginCloseButtons.forEach((button) => {
+        button.addEventListener('click', closeLoginModal);
+    });
+    loginModal.addEventListener('click', (event) => {
+        if (event.target === loginModal) {
+            closeLoginModal();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && loginModal.classList.contains('is-open')) {
+            closeLoginModal();
+        }
+    });
+}
+
+const signupButton = document.querySelector('#open-signup-modal') || document.querySelector('.sign-up-btn');
+const signupModal = document.querySelector('#signup-modal');
+const signupCloseButtons = document.querySelectorAll('[data-close-signup]');
+const signupPasswordToggles = document.querySelectorAll('[data-toggle-password]');
+const closeSignupModal = () => {
+    if (!signupModal) {
+        return;
+    }
+    signupModal.classList.remove('is-open');
+    signupModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('signup-modal-open');
+};
+const openSignupModal = () => {
+    if (!signupModal) {
+        return;
+    }
+    signupModal.classList.add('is-open');
+    signupModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('signup-modal-open');
+    const firstInput = signupModal.querySelector('input');
+    if (firstInput) {
+        firstInput.focus();
+    }
+};
+if (signupButton && signupModal) {
+    signupButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        openSignupModal();
+    });
+    signupCloseButtons.forEach((button) => {
+        button.addEventListener('click', closeSignupModal);
+    });
+    signupModal.addEventListener('click', (event) => {
+        if (event.target === signupModal) {
+            closeSignupModal();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && signupModal.classList.contains('is-open')) {
+            closeSignupModal();
+        }
+    });
+}
+signupPasswordToggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+        const input = toggle.parentElement.querySelector('input');
+        const icon = toggle.querySelector('i');
+        if (!input || !icon) {
+            return;
+        }
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        icon.className = isPassword ? 'bx bx-show' : 'bx bx-hide';
+    });
+});
+
+

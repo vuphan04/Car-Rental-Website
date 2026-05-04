@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mua xe cu gia re</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.boxicons.com/3.0.8/css/boxicons.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
@@ -20,7 +20,7 @@
             <div class="nav-panel" id="primary-navigation">
                 <div class="nav-links">
                     <a href="#" class="nav-link">Trang Chủ</a>
-                    <a href="#rentals" class="nav-link">Mua xe</a>
+                    <a href="/mua-xe.html" class="nav-link">Mua xe</a>
                     <a href="#team" class="nav-link">Đội ngũ Nhân Viên</a>
                     <a href="#faq" class="nav-link">Faq</a>
                     <a href="#" class="nav-link">Blog</a>
@@ -28,11 +28,37 @@
                 </div>
 
                 <div class="right-nav">
-                    <button class="search-toggle" type="button" aria-label="Mở ô tìm kiếm">
-                        <i class="bx bx-search search-icon" aria-hidden="true"></i>
-                    </button>
-                    <div class="search-box">
-                        <input type="search" placeholder="Search here...">
+                    <div class="auth-state" id="auth-state" hidden>
+                        <div class="account-menu" id="account-menu">
+                            <button type="button" class="auth-state__label account-menu__trigger" id="account-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="account-menu-dropdown">
+                                <i class="bx bx-user-circle" aria-hidden="true"></i>
+                                <span>Xin chào, <strong id="auth-user-name">bạn</strong></span>
+                                <i class="bx bx-chevron-down account-menu__chevron" aria-hidden="true"></i>
+                            </button>
+                            <div class="account-menu__dropdown" id="account-menu-dropdown" role="menu" aria-labelledby="account-menu-trigger">
+                                <button type="button" class="account-menu__item" role="menuitem" data-open-profile>
+                                    <i class="bx bx-edit-alt" aria-hidden="true"></i>
+                                    <span>Thay đổi thông tin</span>
+                                </button>
+                                <button type="button" class="account-menu__item" role="menuitem" data-open-favorites>
+                                    <i class="bx bx-heart" aria-hidden="true"></i>
+                                    <span>Xe yêu thích</span>
+                                </button>
+                                <button type="button" class="account-menu__item" role="menuitem" data-open-notifications>
+                                    <i class="bx bx-bell" aria-hidden="true"></i>
+                                    <span>Thông báo</span>
+                                </button>
+                                <button type="button" class="account-menu__item" role="menuitem">
+                                    <i class="bx bx-cart" aria-hidden="true"></i>
+                                    <span>Giỏ hàng</span>
+                                </button>
+                                <button type="button" class="account-menu__item" role="menuitem">
+                                    <i class="bx bx-car" aria-hidden="true"></i>
+                                    <span>Đăng bán xe cũ</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="nav-action auth-logout-btn" id="logout-button">Đăng xuất</button>
                     </div>
                     <a href="#" class="nav-action login-btn" id="open-login-modal">Đăng nhập</a>
                     <a href="#" class="nav-action sign-up-btn" id="open-signup-modal">Đăng ký tài khoản</a>
@@ -62,52 +88,54 @@
     <section class="home" id="home">
         <div class="home-container container">
             <div class="home-form-card">
-                <form action="" class="home-form">
+                <form action="" class="home-form" id="home-search-form">
                     <h2>Tìm chiếc xe <span>hoàn hảo nhất cho bạn</span></h2>
 
-                    <select id="brand">
+                    <select id="home-search-brand" name="brand">
                         <option value="">Chọn hãng xe</option>
-                        <option value="toyota">Toyota</option>
-                        <option value="ford">Ford</option>
-                        <option value="kia">Kia</option>
-                        <option value="hyundai">Hyundai</option>
-                        <option value="mitsubishi">Mitsubishi</option>
-                        <option value="vinfast">VinFast</option>
-                        <option value="mazda">Mazda</option>
-                        <option value="mercedes-benz">Mercedes-Benz</option>
-                        <option value="honda">Honda</option>
-                        <option value="chevrolet">Chevrolet</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Mitsubishi">Mitsubishi</option>
+                        <option value="VinFast">VinFast</option>
+                        <option value="Mazda">Mazda</option>
+                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Chevrolet">Chevrolet</option>
                     </select>
 
-                    <select id="cars">
+                    <select id="home-search-category" name="category">
                         <option value="">Chọn loại xe</option>
-                        <option value="sedan">Sedan</option>
-                        <option value="suv">SUV</option>
-                        <option value="sport">Thể Thao</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Thể thao">Thể thao</option>
                     </select>
 
-                    <input type="number" placeholder="Nhập năm sản xuất">
-                    <input type="text" placeholder="Địa điểm">
+                    <div class="home-form-year-range" aria-label="Khoảng năm sản xuất">
+                        <input type="number" id="home-search-year-from" name="yearFrom" min="1900" max="2099" placeholder="Từ năm">
+                        <input type="number" id="home-search-year-to" name="yearTo" min="1900" max="2099" placeholder="Đến năm">
+                    </div>
 
-                    <select name="priceRange" id="priceRange">
+                    <select name="priceRange" id="home-search-price-range">
                         <option value="">Chọn khoảng giá</option>
                         <option value="0-300000000">Dưới 300 triệu</option>
                         <option value="300000000-500000000">300 - 500 triệu</option>
                         <option value="500000000-700000000">500 - 700 triệu</option>
                         <option value="700000000-1000000000">700 triệu - 1 tỷ</option>
-                        <option value="1000000000-200000₀₀₀₀₀₀₀₀₀">1 - 2 tỷ</option>
-                        <option value="2０００００００００-5０００００００００">2 - 5 tỷ</option>
-                        <option value="5000000000-9999999999">Trên 5 tỷ</option>
+                        <option value="1000000000-2000000000">1 - 2 tỷ</option>
+                        <option value="2000000000-5000000000">2 - 5 tỷ</option>
+                        <option value="5000000000-">Trên 5 tỷ</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-condition" name="condition">
                         <option value="">Tình trạng</option>
-                        <option value="new">Xe mới</option>
-                        <option value="used">Xe đã qua sử dụng</option>
-                        <option value="like-new">Xe như mới</option>
+                        <option value="Xe mới">Xe mới</option>
+                        <option value="Xe cũ">Xe cũ</option>
+                        <option value="Xe như mới">Xe như mới</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-mileage" name="mileageRange">
                         <option value="">Số km</option>
                         <option value="0-10000">Dưới 10.000 km</option>
                         <option value="10000-50000">10.000 - 50.000 km</option>
@@ -115,46 +143,40 @@
                         <option value="100000-">Trên 100.000 km</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-fuel" name="fuel">
                         <option value="">Nhiên liệu</option>
-                        <option value="xang">Xăng</option>
-                        <option value="dau">Dầu</option>
-                        <option value="dien">Điện</option>
-                        <option value="hybrid">Hybrid</option>
+                        <option value="Xăng">Xăng</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Điện">Điện</option>
+                        <option value="Hybrid">Hybrid</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-gearbox" name="gearbox">
                         <option value="">Hộp số</option>
-                        <option value="so-san">Số sàn</option>
-                        <option value="so-tu-dong">Số tự động</option>
+                        <option value="Số Sàn">Số Sàn</option>
+                        <option value="Tự động">Số tự động</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-origin" name="origin">
                         <option value="">Xuất xứ</option>
-                        <option value="trong-nuoc">Trong nước</option>
-                        <option value="nhap-khau">Nhập khẩu</option>
+                        <option value="Trong nước">Trong nước</option>
+                        <option value="Nhập khẩu">Nhập khẩu</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-color" name="color">
                         <option value="">Màu sắc</option>
-                        <option value="den">Đen</option>
-                        <option value="trang">Trắng</option>
-                        <option value="do">Đỏ</option>
-                        <option value="xam">Xám</option>
+                        <option value="Đen">Đen</option>
+                        <option value="Trắng">Trắng</option>
+                        <option value="Đỏ">Đỏ</option>
+                        <option value="Xám">Xám</option>
                         <option value="other">Màu khác</option>
                     </select>
 
-                    <select>
+                    <select id="home-search-seats" name="seats">
                         <option value="">Số chỗ</option>
-                        <option value="4">4 chỗ</option>
-                        <option value="5">5 chỗ</option>
-                        <option value="7">7 chỗ</option>
-                    </select>
-
-                    <select>
-                        <option value="">Pháp lý</option>
-                        <option value="day-du">Giấy tờ đầy đủ</option>
-                        <option value="dang-ky">Đã đăng ký</option>
+                        <option value="4 chỗ">4 chỗ</option>
+                        <option value="5 chỗ">5 chỗ</option>
+                        <option value="7 chỗ">7 chỗ</option>
                     </select>
 
                     <button type="submit" class="search-btn">Tìm kiếm</button>
@@ -174,68 +196,146 @@
         <h2>Dòng xe được yêu thích nhất của chúng tôi <br>Giao dịch nhanh gọn, Giá cạnh tranh, Uy tín</h2>
     </div>
 
-    <div class="rental-container">
-        <!-- demo lay data tu js--->
+    <div class="rental-actions">
+        <a href="/mua-xe.html" class="view-all-btn" id="rental-view-all-button">
+            XEM TẤT CẢ +
+        </a>
+    </div>
+
+    <div class="rental-slider">
+        <button type="button" class="rental-slider-btn rental-slider-btn--prev" id="rental-slider-prev" aria-label="Xem xe trước">
+            <i class="bx bx-chevron-left"></i>
+        </button>
+        <div class="rental-container">
+            <!-- demo lay data tu js--->
+        </div>
+        <button type="button" class="rental-slider-btn rental-slider-btn--next" id="rental-slider-next" aria-label="Xem xe tiếp theo">
+            <i class="bx bx-chevron-right"></i>
+        </button>
     </div>
 </section>
-<!-- Nhân viên -->
-<section class="team" id="team"></section>
-<!-- heading -->
- <div class="heading">
-    <span> Đội ngũ nhân viên của chúng tôi</span>
-    <h2> Gặp mặt trực tiếp đội ngũ nhân viên dày dặn kinh nghiệm</h2>
- </div>
- <!-- Nhan vien -->
-<div class="team-container container">
-    <div class="team-box">
-        <img src="../images/sale1.png" alt="" class="team-img">
-        <div class="team-data">
-            <h3>Vũ Văn A </h3>
-            <span>Nhân viên kinh doanh</span>
-            <div class="team-social">
-                <a href="#"><i class="bx bxl-facebook"></i></a>
-                <a href="#"><i class="bx bxl-twitter"></i></a>
-                <a href="#"><i class="bx bxl-instagram"></i></a>
-            </div>
+
+<section class="drive-steps" aria-labelledby="drive-steps-title">
+    <div class="drive-steps__inner">
+        <h2 id="drive-steps-title">Trải Nghiệm Chiếc Xe Mơ Ước</h2>
+        <div class="drive-steps__grid">
+            <article class="drive-step">
+                <span class="drive-step__icon">
+                    <i class="bx bx-search" aria-hidden="true"></i>
+                </span>
+                <h3>1. Khám Phá Bộ Sưu Tập</h3>
+                <p>Duyệt qua danh mục xe đa dạng từ các thương hiệu hàng đầu. Tìm chiếc xe phù hợp với phong cách và nhu cầu của bạn.</p>
+            </article>
+            <article class="drive-step">
+                <span class="drive-step__icon">
+                    <i class="bx bx-calendar" aria-hidden="true"></i>
+                </span>
+                <h3>2. Đặt Lịch Lái Thử</h3>
+                <p>Tìm thấy điều gì đó bạn yêu thích? Dễ dàng gửi yêu cầu lái thử trực tuyến. Chọn ngày và giờ ưa thích của bạn.</p>
+            </article>
+            <article class="drive-step">
+                <span class="drive-step__icon">
+                    <i class="bx bx-key" aria-hidden="true"></i>
+                </span>
+                <h3>3. Tận Hưởng Chuyến Đi</h3>
+                <p>Ghé thăm showroom hoặc một địa điểm được chỉ định và trải nghiệm cảm giác hồi hộp khi lái chiếc xe bạn đã chọn. Đội ngũ của chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>
+            </article>
         </div>
     </div>
-    <div class="team-box">
-        <img src="../images/sale1.png" alt="" class="team-img">
-        <div class="team-data">
-            <h3>Vũ Văn A </h3>
-            <span>Nhân viên kinh doanh</span>
-            <div class="team-social">
-                <a href="#"><i class="bx bxl-facebook"></i></a>
-                <a href="#"><i class="bx bxl-twitter"></i></a>
-                <a href="#"><i class="bx bxl-instagram"></i></a>
-            </div>
-        </div>
+</section>
+
+<section class="test-drive" id="test-drive" aria-labelledby="test-drive-title">
+    <div class="test-drive__inner">
+        <h2 id="test-drive-title">Sẵn Sàng Tìm Chiếc Xe Hoàn Hảo?</h2>
+        <p>Cách tốt nhất để biết một chiếc xe có phù hợp với bạn hay không là ngồi vào vị trí lái. Gửi yêu cầu lái thử ngay hôm nay!</p>
+        <a href="#footer" class="test-drive__button">Yêu Cầu Lái Thử</a>
     </div>
-    <div class="team-box">
-        <img src="../images/sale1.png" alt="" class="team-img">
-        <div class="team-data">
-            <h3>Vũ Văn B </h3>
-            <span>Nhân viên kinh doanh</span>
-            <div class="team-social">
-                <a href="#"><i class="bx bxl-facebook"></i></a>
-                <a href="#"><i class="bx bxl-twitter"></i></a>
-                <a href="#"><i class="bx bxl-instagram"></i></a>
+</section>
+
+<div class="all-cars-modal" id="all-cars-modal" aria-hidden="true">
+    <div class="all-cars-modal__overlay" data-close-all-cars></div>
+    <div class="all-cars-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="all-cars-modal-title">
+        <div class="all-cars-modal__header">
+            <div>
+                <span class="all-cars-modal__eyebrow">Danh sách xe</span>
+                <h2 id="all-cars-modal-title">Tất cả xe đang bán</h2>
             </div>
+            <label class="all-cars-search">
+                <i class="bx bx-search" aria-hidden="true"></i>
+                <input type="search" id="all-cars-search" placeholder="Tìm theo tên xe">
+            </label>
+            <button type="button" class="all-cars-modal__close" data-close-all-cars aria-label="Đóng danh sách tất cả xe">
+                <i class="bx bx-x"></i>
+            </button>
         </div>
+        <div class="all-cars-grid" id="all-cars-grid"></div>
     </div>
-    <div class="team-box">
-        <img src="../images/sale1.png" alt="" class="team-img">
-        <div class="team-data">
-            <h3>Vũ Văn C </h3>
-            <span>Nhân viên kinh doanh</span>
-            <div class="team-social">
-                <a href="#"><i class="bx bxl-facebook"></i></a>
-                <a href="#"><i class="bx bxl-twitter"></i></a>
-                <a href="#"><i class="bx bxl-instagram"></i></a>
+</div>
+<div class="search-results-modal" id="search-results-modal" aria-hidden="true">
+    <div class="search-results-modal__overlay" data-close-search-results></div>
+    <div class="search-results-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search-results-title">
+        <div class="search-results-modal__header">
+            <div>
+                <span class="search-results-modal__eyebrow">Kết quả tìm kiếm</span>
+                <h2 id="search-results-title">Xe phù hợp với tiêu chí của bạn</h2>
+                <p id="search-results-summary">Chọn một xe để xem thông tin chi tiết.</p>
             </div>
+            <button type="button" class="search-results-modal__close" data-close-search-results aria-label="Đóng kết quả tìm kiếm">
+                <i class="bx bx-x"></i>
+            </button>
+        </div>
+        <div class="search-results-grid" id="search-results-grid"></div>
+    </div>
+</div>
+<div class="favorite-cars-modal" id="favorite-cars-modal" aria-hidden="true">
+    <div class="favorite-cars-modal__overlay" data-close-favorites></div>
+    <div class="favorite-cars-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="favorite-cars-title">
+        <div class="favorite-cars-modal__header">
+            <div>
+                <span class="favorite-cars-modal__eyebrow">Danh sách yêu thích</span>
+                <h2 id="favorite-cars-title">Xe yêu thích của bạn</h2>
+            </div>
+            <button type="button" class="favorite-cars-modal__close" data-close-favorites aria-label="Đóng xe yêu thích">
+                <i class="bx bx-x"></i>
+            </button>
+        </div>
+        <div class="favorite-cars-grid" id="favorite-cars-grid"></div>
+    </div>
+</div>
+<div class="notifications-modal" id="notifications-modal" aria-hidden="true">
+    <div class="notifications-modal__overlay" data-close-notifications></div>
+    <div class="notifications-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="notifications-title">
+        <div class="notifications-modal__header">
+            <div>
+                <span class="notifications-modal__eyebrow">Thông báo</span>
+                <h2 id="notifications-title">Thông báo của bạn</h2>
+            </div>
+            <button type="button" class="notifications-modal__close" data-close-notifications aria-label="Đóng thông báo">
+                <i class="bx bx-x"></i>
+            </button>
+        </div>
+        <div class="notifications-list" id="notifications-list">
+            <article class="notification-empty">
+                <i class="bx bx-bell-off" aria-hidden="true"></i>
+                <strong>Chưa có thông báo mới</strong>
+                <p>Các cập nhật về xe yêu thích, lịch hẹn hoặc ưu đãi sẽ hiển thị tại đây.</p>
+            </article>
         </div>
     </div>
 </div>
+
+<section class="team" id="team">
+    <div class="heading">
+        <span>Đội ngũ nhân viên của chúng tôi</span>
+        <h2>Gặp mặt đội ngũ kinh doanh nổi bật tại OkXe</h2>
+    </div>
+    <div class="team-container container" id="team-container">
+        <article class="team-empty">
+            <i class="bx bx-loader-alt bx-spin" aria-hidden="true"></i>
+            <p>Đang tải đội ngũ kinh doanh nổi bật...</p>
+        </article>
+    </div>
+</section>
 <!-- FAQ -->
 <section class="faq" id="faq">
     <div class="heading">
@@ -344,10 +444,11 @@
                         <input type="checkbox" name="remember">
                         <span>Ghi nhớ đăng nhập</span>
                     </label>
-                    <a href="#">Quên mật khẩu?</a>
+                    <a href="#" id="open-forgot-password-modal">Quên mật khẩu?</a>
                 </div>
                 <button type="submit" class="login-form__submit">Đăng nhập</button>
-                <p class="login-form__register">Chưa có tài khoản? <a href="#">Đăng ký ngay</a></p>
+                <p class="form-feedback" id="login-feedback" aria-live="polite"></p>
+                <p class="login-form__register">Chưa có tài khoản? <a href="#" id="switch-to-signup">Đăng ký ngay</a></p>
             </form>
         </div>
     </div>
@@ -388,7 +489,160 @@
                     <span>Tôi đồng ý với <a href="#">Điều khoản và Điều kiện</a></span>
                 </label>
                 <button type="submit" class="signup-form__submit">Tạo tài khoản</button>
-                
+                <p class="form-feedback" id="signup-feedback" aria-live="polite"></p>
+                <p class="signup-form__switch">Đã có tài khoản? <a href="#" id="switch-to-login">Đăng nhập</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="profile-modal" id="profile-modal" aria-hidden="true">
+    <div class="profile-modal__overlay" data-close-profile></div>
+    <div class="profile-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+        <button class="profile-modal__close" type="button" aria-label="Đóng cập nhật thông tin" data-close-profile>
+            <i class="bx bx-x"></i>
+        </button>
+        <form class="profile-form">
+            <div class="profile-form__header">
+                <span class="profile-form__eyebrow">Tài khoản khách hàng</span>
+                <h2 id="profile-modal-title">Thay đổi thông tin cá nhân</h2>
+            </div>
+
+            <section class="profile-form__section">
+                <div class="profile-avatar">
+                    <div class="profile-avatar__preview" id="profile-avatar-preview">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div>
+                        <strong>Ảnh đại diện</strong>
+                        <span>Chọn ảnh JPG, PNG, WEBP hoặc GIF, tối đa 5MB.</span>
+                        <button type="button" class="profile-avatar__button" id="choose-avatar-button">
+                            <i class="bx bx-upload"></i>
+                            <span>Upload ảnh</span>
+                        </button>
+                        <input type="file" id="profile-avatar-input" accept="image/*" hidden>
+                    </div>
+                </div>
+
+                <div class="profile-form__grid">
+                    <label>
+                        <span>Họ và tên</span>
+                        <input type="text" name="fullName" placeholder="Nguyễn Văn A" readonly aria-readonly="true" title="Họ và tên không thể thay đổi tại đây">
+                    </label>
+                    <label>
+                        <span>Số điện thoại</span>
+                        <input type="tel" name="phone" placeholder="0912345678">
+                    </label>
+                    <label>
+                        <span>Số CCCD</span>
+                        <input type="text" name="citizenId" inputmode="numeric" pattern="[0-9]{12}" maxlength="12" placeholder="012345678901">
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="email@example.com" readonly aria-readonly="true" title="Email không thể thay đổi tại đây">
+                    </label>
+                    <label>
+                        <span>Ngày sinh</span>
+                        <input type="date" name="birthDate">
+                    </label>
+                    <label>
+                        <span>Giới tính</span>
+                        <select name="gender">
+                            <option value="">Chọn giới tính</option>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                            <option value="other">Khác</option>
+                        </select>
+                    </label>
+                </div>
+            </section>
+
+            <section class="profile-form__section">
+                <h3>Địa chỉ liên hệ</h3>
+                <div class="profile-form__grid">
+                    <label>
+                        <span>Tỉnh/thành phố</span>
+                        <input type="text" name="addressProvince" placeholder="TP. Hà Nội">
+                    </label>
+                    <label>
+                        <span>Quận/huyện</span>
+                        <input type="text" name="addressDistrict" placeholder="Quận Hoàn Kiếm">
+                    </label>
+                    <label>
+                        <span>Phường/xã</span>
+                        <input type="text" name="addressWard" placeholder="Phường Tràng Tiền">
+                    </label>
+                    <label class="profile-form__field--wide">
+                        <span>Địa chỉ chi tiết</span>
+                        <input type="text" name="addressDetail" placeholder="Số nhà, tên đường">
+                    </label>
+                </div>
+            </section>
+
+            <div class="profile-form__actions">
+                <button type="button" class="profile-form__secondary" data-close-profile>Hủy</button>
+                <button type="submit" class="profile-form__submit">Cập nhật thông tin</button>
+            </div>
+            <p class="form-feedback" id="profile-feedback" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
+<div class="forgot-password-modal" id="forgot-password-modal" aria-hidden="true">
+    <div class="forgot-password-modal__overlay" data-close-forgot-password></div>
+    <div class="forgot-password-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="forgot-password-title">
+        <button class="forgot-password-modal__close" type="button" aria-label="Đóng quên mật khẩu" data-close-forgot-password>
+            <i class="bx bx-x"></i>
+        </button>
+        <div class="forgot-password-modal__card">
+            <span class="forgot-password-modal__eyebrow">Khôi phục tài khoản</span>
+            <h2 class="forgot-password-modal__title" id="forgot-password-title">Nhận mã OTP qua email</h2>
+            <p class="forgot-password-modal__subtitle">Nhập email đã đăng ký. Nếu email có trong hệ thống, chúng tôi sẽ gửi mã OTP để bạn đặt lại mật khẩu.</p>
+            <form class="forgot-password-form">
+                <label class="forgot-password-form__group">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="Nhập email của bạn" required>
+                </label>
+                <button type="submit" class="forgot-password-form__submit">Gửi mã OTP</button>
+                <p class="form-feedback" id="forgot-password-feedback" aria-live="polite"></p>
+                <button type="button" class="forgot-password-form__secondary" id="open-reset-password-modal">Tôi đã có mã OTP</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="reset-password-modal" id="reset-password-modal" aria-hidden="true">
+    <div class="reset-password-modal__overlay" data-close-reset-password></div>
+    <div class="reset-password-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="reset-password-title">
+        <button class="reset-password-modal__close" type="button" aria-label="Đóng đặt lại mật khẩu" data-close-reset-password>
+            <i class="bx bx-x"></i>
+        </button>
+        <div class="reset-password-modal__card">
+            <span class="reset-password-modal__eyebrow">Mật khẩu mới</span>
+            <h2 class="reset-password-modal__title" id="reset-password-title">Nhập OTP để khôi phục</h2>
+            <p class="reset-password-modal__subtitle" id="reset-password-subtitle">Mở email, lấy mã OTP gồm 6 chữ số rồi nhập bên dưới để tạo mật khẩu mới.</p>
+            <form class="reset-password-form">
+                <label class="reset-password-form__field">
+                    <i class="bx bx-envelope"></i>
+                    <input type="email" name="email" placeholder="Email đã nhận OTP" required>
+                </label>
+                <label class="reset-password-form__field">
+                    <i class="bx bx-key"></i>
+                    <input type="text" name="otp" placeholder="Nhập mã OTP 6 số" inputmode="numeric" maxlength="6" pattern="\d{6}" required>
+                </label>
+                <label class="reset-password-form__field">
+                    <i class="bx bx-lock-alt"></i>
+                    <input type="password" name="password" placeholder="Mật khẩu mới" required>
+                    <button type="button" class="reset-password-form__toggle" data-toggle-reset-password aria-label="Hiện hoặc ẩn mật khẩu mới">
+                        <i class="bx bx-hide"></i>
+                    </button>
+                </label>
+                <label class="reset-password-form__field">
+                    <i class="bx bx-lock-alt"></i>
+                    <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu mới" required>
+                    <button type="button" class="reset-password-form__toggle" data-toggle-reset-password aria-label="Hiện hoặc ẩn xác nhận mật khẩu">
+                        <i class="bx bx-hide"></i>
+                    </button>
+                </label>
+                <button type="submit" class="reset-password-form__submit">Cập nhật mật khẩu</button>
+                <p class="form-feedback" id="reset-password-feedback" aria-live="polite"></p>
             </form>
         </div>
     </div>
@@ -403,7 +657,7 @@
         <div class="footer-links-col">
             <h3>Pages</h3>
             <a href="#home">Trang chủ</a>
-            <a href="#rentals">Mua xe</a>
+            <a href="/mua-xe.html">Mua xe</a>
             <a href="#team">Đội ngũ nhân viên </a>
             <a href="#faq">Hỏi đáp </a>
         </div>
@@ -446,15 +700,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

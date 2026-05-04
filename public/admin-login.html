@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập nhân viên OkXe</title>
+    <link rel="stylesheet" href="admin-login.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="admin-login-page">
+        <section class="admin-login-panel" aria-labelledby="admin-login-title">
+            <a href="/" class="admin-login-logo" aria-label="OkXe">Ok<span>Xe</span></a>
+            <div class="admin-login-heading">
+                <p>Trang quản trị</p>
+                <h1 id="admin-login-title">Đăng nhập nhân viên</h1>
+            </div>
+
+            <form class="admin-login-form" id="admin-login-form">
+                <label class="admin-login-field">
+                    <span>Email nhân viên</span>
+                    <div>
+                        <i class="bx bx-envelope" aria-hidden="true"></i>
+                        <input type="email" name="email" placeholder="nhanvien@okxe.vn" autocomplete="email" required>
+                    </div>
+                </label>
+
+                <label class="admin-login-field">
+                    <span>Mật khẩu</span>
+                    <div>
+                        <i class="bx bx-lock-alt" aria-hidden="true"></i>
+                        <input type="password" name="password" placeholder="Nhập mật khẩu" autocomplete="current-password" required>
+                    </div>
+                </label>
+
+                <label class="admin-login-remember">
+                    <input type="checkbox" name="remember">
+                    <span>Ghi nhớ đăng nhập</span>
+                </label>
+
+                <button type="submit" class="admin-login-submit" id="admin-login-submit">
+                    <i class="bx bx-log-in" aria-hidden="true"></i>
+                    <span>Đăng nhập</span>
+                </button>
+
+                <p class="admin-login-feedback" id="admin-login-feedback" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/admin-login.js"></script>
+</body>
+</html>

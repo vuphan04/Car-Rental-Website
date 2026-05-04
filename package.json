@@ -1,0 +1,26 @@
+{
+  "name": "car-dealer-website",
+  "version": "1.0.0",
+  "description": "Car dealer website served with Node.js and Express",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "start:stable": "powershell -ExecutionPolicy Bypass -File scripts/start-backend.ps1",
+    "start:stable:bg": "powershell -ExecutionPolicy Bypass -File scripts/start-backend-background.ps1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+.env
+logs/
+*.log
+data/mail-previews/
+data/*.db-journal
+storage/
